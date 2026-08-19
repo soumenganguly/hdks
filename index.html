@@ -33,40 +33,8 @@
 
     --wrap: 1180px;
   }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --egg:#2B2015;
-      --egg-2:#35281B;
-      --card:#3C2C1D;
-      --ink:#F6E9D7;
-      --ink-soft:#CDB598;
-      --yolk:#F5B247;
-      --yolk-deep:#FFC968;
-      --brick:#F0793A;
-      --brick-deep:#FF9257;
-      --sky:#D89A5F;
-      --berry:#DE7B4C;
-      --line: rgba(246,233,215,0.16);
-      --line-soft: rgba(246,233,215,0.09);
-      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 28px -14px rgba(0,0,0,0.55);
-    }
-  }
-  :root[data-theme="dark"]{
-    --egg:#2B2015;
-    --egg-2:#35281B;
-    --card:#3C2C1D;
-    --ink:#F6E9D7;
-    --ink-soft:#CDB598;
-    --yolk:#F5B247;
-    --yolk-deep:#FFC968;
-    --brick:#F0793A;
-    --brick-deep:#FF9257;
-    --sky:#D89A5F;
-    --berry:#DE7B4C;
-    --line: rgba(246,233,215,0.16);
-    --line-soft: rgba(246,233,215,0.09);
-    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 28px -14px rgba(0,0,0,0.55);
-  }
+  /* Fixed brand palette — always cream/orange, regardless of system theme */
+  :root{ color-scheme: light; }
 
   /* ============ RESET-ADJACENT ============ */
   *{box-sizing:border-box;}
@@ -211,18 +179,25 @@
   .hero-badge b{display:block; font-family:var(--font-display); font-size:1.05rem;}
   .hero-badge span{display:block; font-size:0.76rem; color:var(--ink-soft); letter-spacing:0.02em;}
 
-  .hero-art{position:relative; aspect-ratio:0.86; max-width:400px; margin-inline:auto;}
+  .hero-art{position:relative; width:100%; max-width:340px; margin:0 auto 36px;}
   .hero-art::before{
-    content:""; position:absolute; inset:14% -8% -8% 18%; z-index:0;
+    content:""; position:absolute; inset:16px -16px -16px 16px; z-index:0;
     border-radius:22px; background:var(--yolk);
   }
   .hero-photo{
-    position:absolute; border-radius:20px; overflow:hidden;
+    position:relative; z-index:1; width:100%; aspect-ratio:0.82;
+    border-radius:20px; overflow:hidden;
     border:6px solid var(--card); box-shadow:var(--shadow);
+    background:var(--card);
   }
   .hero-photo img{width:100%; height:100%; object-fit:cover; display:block;}
-  .hero-photo-a{inset:0 18% 16% 0; z-index:2;}
-  .hero-photo-b{width:54%; aspect-ratio:0.8; right:-6%; bottom:-8%; z-index:3;}
+  .hero-photo-b{
+    position:absolute; z-index:2; width:52%; aspect-ratio:0.8;
+    right:-28px; bottom:-28px;
+    border-radius:18px; overflow:hidden;
+    border:6px solid var(--card); box-shadow:var(--shadow);
+    background:var(--card);
+  }
   .photo-tag{
     position:absolute; left:12px; bottom:12px; z-index:4;
     display:flex; align-items:center; gap:7px;
@@ -490,8 +465,6 @@
 
   /* ============ FOOTER ============ */
   footer.site{background:var(--ink); color:color-mix(in srgb, var(--egg) 92%, transparent); padding-block:56px 28px;}
-  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) footer.site{background:#1C140E;} }
-  :root[data-theme="dark"] footer.site{background:#1C140E;}
   .foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px;}
   @media (max-width:760px){.foot-grid{grid-template-columns:1fr; gap:32px;}}
   .foot-brand{display:flex; align-items:center; gap:10px;}
@@ -579,7 +552,7 @@
       </div>
 
       <div class="hero-art">
-        <div class="hero-photo hero-photo-a">
+        <div class="hero-photo">
           <img src="assets/play.jpg" alt="Children exploring at a play station at Humpty Dumpty Kidz School">
           <span class="photo-tag"><span class="mark mark-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4l12 8-12 8V4z" fill="#FFFBF3" stroke="none"/></svg></span>Play</span>
         </div>
