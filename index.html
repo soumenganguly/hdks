@@ -174,7 +174,8 @@
   }
   .hero-ctas{display:flex; gap:14px; margin-top:32px; flex-wrap:wrap;}
   .hero-badges{display:flex; gap:22px; margin-top:40px; flex-wrap:wrap;}
-  .hero-badge{display:flex; align-items:center; gap:10px;}
+  .hero-badge{display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit;}
+  a.hero-badge:hover b{color:var(--brick);}
   .hero-badge svg{width:22px; height:22px; stroke:var(--yolk-deep); flex:none;}
   .hero-badge b{display:block; font-family:var(--font-display); font-size:1.05rem;}
   .hero-badge span{display:block; font-size:0.76rem; color:var(--ink-soft); letter-spacing:0.02em;}
@@ -401,8 +402,9 @@
   .badge{
     background:var(--card); border:1px solid var(--line); border-radius:16px;
     padding:18px 20px; display:flex; align-items:center; gap:12px; box-shadow:var(--shadow);
-    flex:1 1 210px;
+    flex:1 1 210px; text-decoration:none; color:inherit; transition:border-color .15s ease;
   }
+  a.badge:hover{border-color:var(--brick);}
   .badge svg{width:26px; height:26px; stroke:var(--yolk-deep); flex:none;}
   .badge b{display:block; font-family:var(--font-display); font-size:1.1rem;}
   .badge span{display:block; font-size:0.78rem; color:var(--ink-soft);}
@@ -536,10 +538,10 @@
           <a class="btn btn-ghost" href="#approach">See Our Approach</a>
         </div>
         <div class="hero-badges">
-          <div class="hero-badge">
+          <a class="hero-badge" href="https://www.google.com/search?hl=en-DE&gl=de&q=Humpty+Dumpty+Kidz+School,+34,+3B+Street,+near+54+Feet+Road,+Srinagar+Pally,+Benachity,+Durgapur,+West+Bengal+713213,+India&ludocid=5917088873718196535&lsig=AB86z5WMybtThF_ZJbP-ZHX0VX7Q&hl=en&gl=DE&sa=X&ved=2ahUKEwjNvoDpva2WAxVTxwIHHcGmOXsQ3PALegQIIBAQ#lrd=0x39f7720a80b20017:0x521db8fb0663a937,1" target="_blank" rel="noopener noreferrer">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9 12 2"/></svg>
             <div><b>5.0 / 5.0</b><span>Google rating</span></div>
-          </div>
+          </a>
           <div class="hero-badge">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21C12 21 4 15.5 4 9.5A5.5 5.5 0 0 1 12 5a5.5 5.5 0 0 1 8 4.5C20 15.5 12 21 12 21Z"/></svg>
             <div><b>Since founding</b><span>Led by Dr. Prasan Dibhar</span></div>
@@ -762,10 +764,10 @@
         <p class="eyebrow">Recognition &amp; Trust</p>
         <h2 style="font-size:clamp(1.7rem,2.6vw,2.2rem); margin-top:10px;">Families in Durgapur trust us with their little ones.</h2>
         <div class="badge-row" style="margin-top:26px;">
-          <div class="badge">
+          <a class="badge" href="https://www.google.com/search?hl=en-DE&gl=de&q=Humpty+Dumpty+Kidz+School,+34,+3B+Street,+near+54+Feet+Road,+Srinagar+Pally,+Benachity,+Durgapur,+West+Bengal+713213,+India&ludocid=5917088873718196535&lsig=AB86z5WMybtThF_ZJbP-ZHX0VX7Q&hl=en&gl=DE&sa=X&ved=2ahUKEwjNvoDpva2WAxVTxwIHHcGmOXsQ3PALegQIIBAQ#lrd=0x39f7720a80b20017:0x521db8fb0663a937,1" target="_blank" rel="noopener noreferrer">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9 12 2"/></svg>
             <div><b>5.0 Google rating</b><span>From parents in our community</span></div>
-          </div>
+          </a>
           <div class="badge">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6-9 6-9-6Z"/><path d="M3 10v6l9 6 9-6v-6"/></svg>
             <div><b>Rashtriya Samman 2025</b><span>National recognition programme</span></div>
