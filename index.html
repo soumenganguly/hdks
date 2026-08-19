@@ -6,20 +6,20 @@
 <style>
   /* ============ TOKENS ============ */
   :root{
-    --egg:#FBF3E4;
-    --egg-2:#F6E8CE;
-    --card:#FFFDF8;
-    --ink:#3A2E22;
-    --ink-soft:#8A7761;
-    --yolk:#F4B93A;
-    --yolk-deep:#DA9A1E;
-    --brick:#C0483A;
-    --brick-deep:#9C382C;
-    --sky:#3E6FA0;
-    --berry:#CE6B57;
-    --line: rgba(58,46,34,0.13);
-    --line-soft: rgba(58,46,34,0.08);
-    --shadow: 0 1px 2px rgba(58,46,34,0.06), 0 8px 24px -12px rgba(58,46,34,0.16);
+    --egg:#FBF4E8;
+    --egg-2:#F5E6D0;
+    --card:#FFFCF6;
+    --ink:#3A2A1C;
+    --ink-soft:#8C7761;
+    --yolk:#F2A126;
+    --yolk-deep:#D6870F;
+    --brick:#E8641B;
+    --brick-deep:#C24F12;
+    --sky:#C97B3D;
+    --berry:#A8461E;
+    --line: rgba(58,42,28,0.13);
+    --line-soft: rgba(58,42,28,0.08);
+    --shadow: 0 1px 2px rgba(58,42,28,0.06), 0 8px 24px -12px rgba(58,42,28,0.16);
 
     --font-display:'Fraunces', Georgia, 'Times New Roman', serif;
     --font-body:'Karla', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -28,36 +28,36 @@
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --egg:#2A2018;
-      --egg-2:#342820;
-      --card:#3A2C21;
-      --ink:#F5E9D6;
-      --ink-soft:#C9B49B;
-      --yolk:#F6C563;
-      --yolk-deep:#FFD98A;
-      --brick:#E2695A;
-      --brick-deep:#F0836F;
-      --sky:#7FA6D2;
-      --berry:#E08D77;
-      --line: rgba(245,233,214,0.16);
-      --line-soft: rgba(245,233,214,0.09);
+      --egg:#2B2015;
+      --egg-2:#35281B;
+      --card:#3C2C1D;
+      --ink:#F6E9D7;
+      --ink-soft:#CDB598;
+      --yolk:#F5B247;
+      --yolk-deep:#FFC968;
+      --brick:#F0793A;
+      --brick-deep:#FF9257;
+      --sky:#D89A5F;
+      --berry:#DE7B4C;
+      --line: rgba(246,233,215,0.16);
+      --line-soft: rgba(246,233,215,0.09);
       --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 28px -14px rgba(0,0,0,0.55);
     }
   }
   :root[data-theme="dark"]{
-    --egg:#2A2018;
-    --egg-2:#342820;
-    --card:#3A2C21;
-    --ink:#F5E9D6;
-    --ink-soft:#C9B49B;
-    --yolk:#F6C563;
-    --yolk-deep:#FFD98A;
-    --brick:#E2695A;
-    --brick-deep:#F0836F;
-    --sky:#7FA6D2;
-    --berry:#E08D77;
-    --line: rgba(245,233,214,0.16);
-    --line-soft: rgba(245,233,214,0.09);
+    --egg:#2B2015;
+    --egg-2:#35281B;
+    --card:#3C2C1D;
+    --ink:#F6E9D7;
+    --ink-soft:#CDB598;
+    --yolk:#F5B247;
+    --yolk-deep:#FFC968;
+    --brick:#F0793A;
+    --brick-deep:#FF9257;
+    --sky:#D89A5F;
+    --berry:#DE7B4C;
+    --line: rgba(246,233,215,0.16);
+    --line-soft: rgba(246,233,215,0.09);
     --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 28px -14px rgba(0,0,0,0.55);
   }
 
@@ -204,35 +204,40 @@
   .hero-badge b{display:block; font-family:var(--font-display); font-size:1.05rem;}
   .hero-badge span{display:block; font-size:0.76rem; color:var(--ink-soft); letter-spacing:0.02em;}
 
-  .hero-art{position:relative; aspect-ratio:1/1; max-width:460px; margin-inline:auto;}
-  .hero-art .yolk-circle{
-    position:absolute; inset:8%;
-    border-radius:50%;
-    background:
-      radial-gradient(circle at 32% 28%, color-mix(in srgb, var(--yolk) 88%, white 12%), var(--yolk) 55%, var(--yolk-deep) 100%);
-    box-shadow: inset 0 -18px 40px -10px rgba(0,0,0,0.18), var(--shadow);
+  .hero-art{position:relative; aspect-ratio:0.86; max-width:400px; margin-inline:auto;}
+  .hero-art::before{
+    content:""; position:absolute; inset:14% -8% -8% 18%; z-index:0;
+    border-radius:22px; background:var(--yolk);
   }
-  .hero-art .crack{
-    position:absolute; inset:0;
-    stroke:var(--ink); stroke-width:3; fill:none;
-    opacity:0.85;
+  .hero-photo{
+    position:absolute; border-radius:20px; overflow:hidden;
+    border:6px solid var(--card); box-shadow:var(--shadow);
   }
-  .hero-art .ring{
-    position:absolute; inset:-4%;
-    border-radius:50%; border:2px dashed var(--line);
+  .hero-photo img{width:100%; height:100%; object-fit:cover; display:block;}
+  .hero-photo-a{inset:0 18% 16% 0; z-index:2;}
+  .hero-photo-b{width:54%; aspect-ratio:0.8; right:-6%; bottom:-8%; z-index:3;}
+  .photo-tag{
+    position:absolute; left:12px; bottom:12px; z-index:4;
+    display:flex; align-items:center; gap:7px;
+    background:var(--card); border-radius:999px; padding:4px 12px 4px 4px;
+    font-weight:800; font-size:0.76rem; box-shadow:var(--shadow);
   }
-  .hero-art .chip{
-    position:absolute; background:var(--card); border:1px solid var(--line);
-    border-radius:16px; padding:10px 14px; box-shadow:var(--shadow);
-    font-weight:700; font-size:0.82rem; display:flex; align-items:center; gap:8px;
+
+  /* Play / Learn marks — small brand badges used next to play- and learning-related content */
+  .mark{
+    display:inline-flex; align-items:center; justify-content:center; flex:none;
+    width:26px; height:26px; border-radius:50%;
   }
-  .hero-art .chip svg{width:16px; height:16px; stroke:var(--brick);}
-  .hero-art .chip-1{top:6%; left:-6%;}
-  .hero-art .chip-2{bottom:10%; right:-8%;}
+  .mark svg{width:14px; height:14px; stroke:#FFFBF3; fill:none;}
+  .mark-play{background:var(--brick);}
+  .mark-learn{background:var(--yolk-deep);}
+  .photo-tag .mark{width:22px; height:22px;}
+  .photo-tag .mark svg{width:12px; height:12px;}
+  .tl-step h4{display:flex; align-items:center; gap:8px;}
 
   @media (max-width: 900px){
     .hero .wrap{grid-template-columns:1fr;}
-    .hero-art{order:-1; max-width:320px;}
+    .hero-art{order:-1; max-width:300px;}
   }
 
   /* ============ MESSAGE FROM THE PRESIDENT ============ */
@@ -420,13 +425,36 @@
   .badge b{display:block; font-family:var(--font-display); font-size:1.1rem;}
   .badge span{display:block; font-size:0.78rem; color:var(--ink-soft);}
 
+  .testimonial-slider{position:relative;}
+  .testimonial-viewport{overflow:hidden; border-radius:20px;}
+  .testimonial-track{display:flex; transition:transform .5s ease;}
+  @media (prefers-reduced-motion: reduce){ .testimonial-track{transition:none;} }
+
   .testimonial{
+    flex:0 0 100%; min-width:0;
     background:var(--card); border:1px solid var(--line); border-radius:20px;
     padding:32px 30px; box-shadow:var(--shadow); position:relative;
   }
   .testimonial p{font-family:var(--font-display); font-style:italic; font-size:1.15rem; line-height:1.5;}
   .testimonial footer{margin-top:16px; font-size:0.86rem; font-weight:700; color:var(--brick);}
   .testimonial footer span{display:block; font-weight:500; color:var(--ink-soft); margin-top:2px;}
+  .testimonial.is-invite{border-style:dashed; box-shadow:none; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:6px;}
+  .testimonial.is-invite p{font-family:var(--font-body); font-style:normal; font-size:1rem; color:var(--ink-soft); font-weight:600;}
+
+  .slider-controls{display:flex; align-items:center; justify-content:space-between; margin-top:18px;}
+  .slider-dots{display:flex; gap:8px;}
+  .slider-dots button{
+    width:9px; height:9px; border-radius:50%; border:none; padding:0; cursor:pointer;
+    background:var(--line); transition:background .2s ease, transform .2s ease;
+  }
+  .slider-dots button[aria-current="true"]{background:var(--brick); transform:scale(1.25);}
+  .slider-arrows{display:flex; gap:8px;}
+  .slider-arrows button{
+    width:34px; height:34px; border-radius:50%; border:1px solid var(--line); background:var(--card);
+    display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--ink);
+  }
+  .slider-arrows button:hover{border-color:var(--brick); color:var(--brick);}
+  .slider-arrows svg{width:16px; height:16px; stroke:currentColor;}
 
   /* ============ ADMISSIONS ============ */
   .admissions{padding-block:88px;}
@@ -541,19 +569,14 @@
         </div>
       </div>
 
-      <div class="hero-art" aria-hidden="true">
-        <div class="ring"></div>
-        <div class="yolk-circle"></div>
-        <svg class="crack" viewBox="0 0 100 100" preserveAspectRatio="none">
-          <path d="M38 8 L46 32 L34 40 L56 58 L44 68 L64 92" />
-        </svg>
-        <div class="chip chip-1">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-          Play-based learning
+      <div class="hero-art">
+        <div class="hero-photo hero-photo-a">
+          <img src="assets/play.jpg" alt="Children exploring at a play station at Humpty Dumpty Kidz School">
+          <span class="photo-tag"><span class="mark mark-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4l12 8-12 8V4z" fill="#FFFBF3" stroke="none"/></svg></span>Play</span>
         </div>
-        <div class="chip chip-2">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"/></svg>
-          Kind, caring teachers
+        <div class="hero-photo hero-photo-b">
+          <img src="assets/learn.jpg" alt="A teacher reading a story to children at Humpty Dumpty Kidz School">
+          <span class="photo-tag"><span class="mark mark-learn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>Learn</span>
         </div>
       </div>
     </div>
@@ -707,9 +730,9 @@
       <div class="timeline">
         <div class="tl-step reveal"><span class="tl-time">8:30</span><h4>Morning Huddle</h4><p>Greetings, songs and a gentle start to the day.</p></div>
         <div class="tl-step reveal"><span class="tl-time">9:15</span><h4>Skill Building</h4><p>Focused, age-appropriate lessons in small groups.</p></div>
-        <div class="tl-step reveal"><span class="tl-time">10:15</span><h4>Play Stations</h4><p>Open-ended, child-led exploration and creativity.</p></div>
+        <div class="tl-step reveal"><span class="tl-time">10:15</span><h4><span class="mark mark-play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7 4l12 8-12 8V4z" fill="#FFFBF3" stroke="none"/></svg></span>Play Stations</h4><p>Open-ended, child-led exploration and creativity.</p></div>
         <div class="tl-step reveal"><span class="tl-time">12:00</span><h4>Nutritious Meals</h4><p>Wholesome food and unhurried mealtime routines.</p></div>
-        <div class="tl-step reveal"><span class="tl-time">1:30</span><h4>Learning Labs</h4><p>Hands-on discovery in literacy, numbers and the world.</p></div>
+        <div class="tl-step reveal"><span class="tl-time">1:30</span><h4><span class="mark mark-learn" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>Learning Labs</h4><p>Hands-on discovery in literacy, numbers and the world.</p></div>
         <div class="tl-step reveal"><span class="tl-time">3:00</span><h4>Outdoor Play</h4><p>Fresh air, movement and free play before pickup.</p></div>
       </div>
     </div>
@@ -729,20 +752,20 @@
       </div>
       <div class="teachers-grid">
         <div class="teacher-card reveal">
-          <div class="avatar avatar-1">ES</div>
-          <h4>Ella Stark</h4>
+          <div class="avatar avatar-1">AB</div>
+          <h4>Ananya Bose</h4>
           <span class="teacher-role">Lead Teacher · 1–2 years</span>
           <p>Focused on first steps, first words and the security of a familiar routine.</p>
         </div>
         <div class="teacher-card reveal">
-          <div class="avatar avatar-2">HB</div>
-          <h4>Harriet Bailey</h4>
+          <div class="avatar avatar-2">PS</div>
+          <h4>Priyanka Sen</h4>
           <span class="teacher-role">Lead Teacher · 2–3 years</span>
           <p>Champions independence — self-feeding, sharing, and early social play.</p>
         </div>
         <div class="teacher-card reveal">
-          <div class="avatar avatar-3">MS</div>
-          <h4>Melinda Schiller</h4>
+          <div class="avatar avatar-3">RM</div>
+          <h4>Riya Mukherjee</h4>
           <span class="teacher-role">Lead Teacher · 3–4 years</span>
           <p>Guides learning labs and school-readiness skills with patience and warmth.</p>
         </div>
@@ -767,9 +790,38 @@
           </div>
         </div>
       </div>
-      <div class="testimonial reveal">
-        <p>"Every morning my daughter runs in without looking back — that's how we knew we'd found the right place. The teachers know her by name and notice the little things."</p>
-        <footer>Ramona Altenwerth<span>Parent, Humpty Dumpty Kidz School</span></footer>
+      <div class="testimonial-slider reveal" id="testimonialSlider">
+        <div class="testimonial-viewport">
+          <div class="testimonial-track" id="testimonialTrack">
+            <div class="testimonial">
+              <p>"Every morning my daughter runs in without looking back — that's how we knew we'd found the right place. The teachers know her by name and notice the little things."</p>
+              <footer>Ramona Altenwerth<span>Parent, Humpty Dumpty Kidz School</span></footer>
+            </div>
+            <div class="testimonial">
+              <p>"What we notice most is the consistency — the same warm faces every day, the same gentle routine. Our son settled in within a week."</p>
+              <footer>Parent of a Toddler<span>Benachity Campus</span></footer>
+            </div>
+            <div class="testimonial">
+              <p>"The teachers treat every child like their own. It's rare to find a school this small that still feels this organised."</p>
+              <footer>Parent of a Preschooler<span>Benachity Campus</span></footer>
+            </div>
+            <div class="testimonial is-invite">
+              <p>Have a Humpty Dumpty story of your own?</p>
+              <p style="margin-top:-4px;">Share it with us and we'll feature it right here.</p>
+            </div>
+          </div>
+        </div>
+        <div class="slider-controls">
+          <div class="slider-dots" id="testimonialDots" role="tablist" aria-label="Choose review"></div>
+          <div class="slider-arrows">
+            <button type="button" id="testimonialPrev" aria-label="Previous review">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button type="button" id="testimonialNext" aria-label="Next review">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -902,4 +954,53 @@
   } else {
     document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
   }
+
+  (function(){
+    var track = document.getElementById('testimonialTrack');
+    var dotsWrap = document.getElementById('testimonialDots');
+    var prevBtn = document.getElementById('testimonialPrev');
+    var nextBtn = document.getElementById('testimonialNext');
+    var slider = document.getElementById('testimonialSlider');
+    if (!track) return;
+
+    var slides = track.querySelectorAll('.testimonial');
+    var current = 0;
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    slides.forEach(function(_, i){
+      var dot = document.createElement('button');
+      dot.type = 'button';
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-label', 'Show review ' + (i + 1));
+      dot.addEventListener('click', function(){ goTo(i); resetAuto(); });
+      dotsWrap.appendChild(dot);
+    });
+    var dots = dotsWrap.querySelectorAll('button');
+
+    function goTo(i){
+      current = (i + slides.length) % slides.length;
+      track.style.transform = 'translateX(-' + (current * 100) + '%)';
+      dots.forEach(function(d, idx){ d.setAttribute('aria-current', idx === current ? 'true' : 'false'); });
+    }
+
+    prevBtn.addEventListener('click', function(){ goTo(current - 1); resetAuto(); });
+    nextBtn.addEventListener('click', function(){ goTo(current + 1); resetAuto(); });
+
+    var autoTimer;
+    function startAuto(){
+      if (reduceMotion) return;
+      autoTimer = setInterval(function(){ goTo(current + 1); }, 6000);
+    }
+    function resetAuto(){
+      clearInterval(autoTimer);
+      startAuto();
+    }
+    slider.addEventListener('mouseenter', function(){ clearInterval(autoTimer); });
+    slider.addEventListener('mouseleave', startAuto);
+    slider.addEventListener('focusin', function(){ clearInterval(autoTimer); });
+    slider.addEventListener('focusout', startAuto);
+
+    goTo(0);
+    startAuto();
+  })();
 </script>
