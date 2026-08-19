@@ -1,0 +1,905 @@
+<title>Humpty Dumpty Kidz School</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,500..600&family=Karla:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+  /* ============ TOKENS ============ */
+  :root{
+    --egg:#FBF3E4;
+    --egg-2:#F6E8CE;
+    --card:#FFFDF8;
+    --ink:#3A2E22;
+    --ink-soft:#8A7761;
+    --yolk:#F4B93A;
+    --yolk-deep:#DA9A1E;
+    --brick:#C0483A;
+    --brick-deep:#9C382C;
+    --sky:#3E6FA0;
+    --berry:#CE6B57;
+    --line: rgba(58,46,34,0.13);
+    --line-soft: rgba(58,46,34,0.08);
+    --shadow: 0 1px 2px rgba(58,46,34,0.06), 0 8px 24px -12px rgba(58,46,34,0.16);
+
+    --font-display:'Fraunces', Georgia, 'Times New Roman', serif;
+    --font-body:'Karla', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    --wrap: 1180px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --egg:#2A2018;
+      --egg-2:#342820;
+      --card:#3A2C21;
+      --ink:#F5E9D6;
+      --ink-soft:#C9B49B;
+      --yolk:#F6C563;
+      --yolk-deep:#FFD98A;
+      --brick:#E2695A;
+      --brick-deep:#F0836F;
+      --sky:#7FA6D2;
+      --berry:#E08D77;
+      --line: rgba(245,233,214,0.16);
+      --line-soft: rgba(245,233,214,0.09);
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 28px -14px rgba(0,0,0,0.55);
+    }
+  }
+  :root[data-theme="dark"]{
+    --egg:#2A2018;
+    --egg-2:#342820;
+    --card:#3A2C21;
+    --ink:#F5E9D6;
+    --ink-soft:#C9B49B;
+    --yolk:#F6C563;
+    --yolk-deep:#FFD98A;
+    --brick:#E2695A;
+    --brick-deep:#F0836F;
+    --sky:#7FA6D2;
+    --berry:#E08D77;
+    --line: rgba(245,233,214,0.16);
+    --line-soft: rgba(245,233,214,0.09);
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 12px 28px -14px rgba(0,0,0,0.55);
+  }
+
+  /* ============ RESET-ADJACENT ============ */
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+  body{
+    margin:0;
+    background:var(--egg);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{display:block; max-width:100%;}
+  a{color:inherit;}
+  h1,h2,h3,h4{
+    font-family:var(--font-display);
+    font-weight:600;
+    line-height:1.1;
+    margin:0;
+    text-wrap:balance;
+    color:var(--ink);
+  }
+  p{margin:0;}
+  ul{margin:0; padding:0; list-style:none;}
+  button{font-family:inherit;}
+
+  .wrap{max-width:var(--wrap); margin-inline:auto; padding-inline:28px;}
+  @media (max-width:640px){ .wrap{padding-inline:20px;} }
+
+  section{position:relative;}
+
+  .eyebrow{
+    font-family:var(--font-body);
+    font-weight:800;
+    font-size:0.72rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--brick);
+  }
+
+  /* ============ BRICK-COURSE DIVIDER (chapter break motif) ============ */
+  .course{
+    height:14px;
+    display:flex;
+    overflow:hidden;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+  .course span{
+    flex:0 0 46px;
+    height:100%;
+    border-right:1px solid var(--line);
+  }
+  .course span:nth-child(odd){background:var(--egg-2);}
+  .course span:nth-child(even){background:var(--egg);}
+  .course.offset{margin-left:-23px;}
+
+  /* ============ HEADER ============ */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:color-mix(in srgb, var(--egg) 88%, transparent);
+    backdrop-filter:blur(10px) saturate(1.1);
+    border-bottom:1px solid var(--line);
+  }
+  .headbar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-block:14px;
+  }
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none;}
+  .brand-logo{height:52px; width:auto; flex:none;}
+  .brand-word{font-family:var(--font-display); font-weight:600; font-size:1.18rem; letter-spacing:-0.01em;}
+  .brand-word small{display:block; font-family:var(--font-body); font-weight:700; font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-soft);}
+  .foot-brand .brand-logo{height:56px;}
+
+  nav.primary{display:flex; align-items:center; gap:28px;}
+  nav.primary a{
+    font-size:0.92rem; font-weight:600; text-decoration:none; color:var(--ink-soft);
+    padding-block:6px; border-bottom:2px solid transparent;
+    transition:color .15s ease, border-color .15s ease;
+  }
+  nav.primary a:hover{color:var(--ink); border-color:var(--yolk);}
+
+  .head-actions{display:flex; align-items:center; gap:14px;}
+  .tel-link{display:flex; align-items:center; gap:6px; font-weight:700; font-size:0.9rem; text-decoration:none; color:var(--ink);}
+  .tel-link svg{width:16px; height:16px; stroke:var(--brick);}
+
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--font-body); font-weight:700; font-size:0.9rem;
+    padding:11px 20px; border-radius:999px; border:1px solid transparent;
+    text-decoration:none; cursor:pointer; white-space:nowrap;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .btn:focus-visible{outline:3px solid var(--sky); outline-offset:2px;}
+  .btn-primary{background:var(--brick); color:#FFF7EE; box-shadow:var(--shadow);}
+  .btn-primary:hover{transform:translateY(-1px); background:var(--brick-deep);}
+  .btn-ghost{background:transparent; border-color:var(--line); color:var(--ink);}
+  .btn-ghost:hover{border-color:var(--brick); color:var(--brick);}
+
+  .menu-toggle{display:none; background:none; border:1px solid var(--line); border-radius:10px; padding:8px; cursor:pointer;}
+  .menu-toggle svg{width:20px; height:20px; stroke:var(--ink);}
+
+  @media (max-width: 920px){
+    nav.primary{
+      position:absolute; top:100%; left:0; right:0;
+      background:var(--egg); border-bottom:1px solid var(--line);
+      flex-direction:column; align-items:flex-start; gap:2px;
+      padding:10px 20px 18px;
+      display:none;
+    }
+    nav.primary.open{display:flex;}
+    nav.primary a{width:100%; padding:10px 0; border-bottom:1px solid var(--line-soft);}
+    .tel-link{display:none;}
+    .menu-toggle{display:inline-flex;}
+  }
+
+  /* ============ HERO ============ */
+  .hero{
+    padding-block:76px 90px;
+    overflow:hidden;
+  }
+  .hero .wrap{
+    display:grid; grid-template-columns: 1.05fr 0.95fr; gap:56px; align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(2.5rem, 4.6vw, 3.9rem);
+    letter-spacing:-0.015em;
+  }
+  .hero h1 em{color:var(--brick); font-style:italic;}
+  .hero-lede{
+    margin-top:20px; font-size:1.1rem; color:var(--ink-soft); max-width:52ch;
+  }
+  .hero-ctas{display:flex; gap:14px; margin-top:32px; flex-wrap:wrap;}
+  .hero-badges{display:flex; gap:22px; margin-top:40px; flex-wrap:wrap;}
+  .hero-badge{display:flex; align-items:center; gap:10px;}
+  .hero-badge svg{width:22px; height:22px; stroke:var(--yolk-deep); flex:none;}
+  .hero-badge b{display:block; font-family:var(--font-display); font-size:1.05rem;}
+  .hero-badge span{display:block; font-size:0.76rem; color:var(--ink-soft); letter-spacing:0.02em;}
+
+  .hero-art{position:relative; aspect-ratio:1/1; max-width:460px; margin-inline:auto;}
+  .hero-art .yolk-circle{
+    position:absolute; inset:8%;
+    border-radius:50%;
+    background:
+      radial-gradient(circle at 32% 28%, color-mix(in srgb, var(--yolk) 88%, white 12%), var(--yolk) 55%, var(--yolk-deep) 100%);
+    box-shadow: inset 0 -18px 40px -10px rgba(0,0,0,0.18), var(--shadow);
+  }
+  .hero-art .crack{
+    position:absolute; inset:0;
+    stroke:var(--ink); stroke-width:3; fill:none;
+    opacity:0.85;
+  }
+  .hero-art .ring{
+    position:absolute; inset:-4%;
+    border-radius:50%; border:2px dashed var(--line);
+  }
+  .hero-art .chip{
+    position:absolute; background:var(--card); border:1px solid var(--line);
+    border-radius:16px; padding:10px 14px; box-shadow:var(--shadow);
+    font-weight:700; font-size:0.82rem; display:flex; align-items:center; gap:8px;
+  }
+  .hero-art .chip svg{width:16px; height:16px; stroke:var(--brick);}
+  .hero-art .chip-1{top:6%; left:-6%;}
+  .hero-art .chip-2{bottom:10%; right:-8%;}
+
+  @media (max-width: 900px){
+    .hero .wrap{grid-template-columns:1fr;}
+    .hero-art{order:-1; max-width:320px;}
+  }
+
+  /* ============ MESSAGE FROM THE PRESIDENT ============ */
+  .president{padding-block:80px; background:var(--egg-2);}
+  .president .wrap{display:grid; grid-template-columns:0.8fr 1.2fr; gap:52px; align-items:center;}
+  @media (max-width:820px){ .president .wrap{grid-template-columns:1fr;} }
+  .president-photo-frame{
+    position:relative; max-width:360px; margin-inline:auto;
+  }
+  .president-photo-frame img{
+    width:100%; aspect-ratio:4/3.6; object-fit:cover; object-position:top;
+    border-radius:18px; border:6px solid var(--card); box-shadow:var(--shadow);
+  }
+  .president-photo-frame::before{
+    content:""; position:absolute; inset:14px -14px -14px 14px; z-index:-1;
+    border-radius:18px; background:var(--yolk);
+  }
+  .president-text blockquote{
+    margin:0; font-family:var(--font-display); font-style:italic; font-weight:500;
+    font-size:clamp(1.25rem, 2.2vw, 1.65rem); line-height:1.4; color:var(--ink);
+  }
+  .president-text .role{
+    display:flex; align-items:center; gap:12px; margin-top:24px;
+  }
+  .president-text .role b{display:block; font-family:var(--font-display); font-size:1.05rem; font-weight:600;}
+  .president-text .role span{display:block; font-size:0.82rem; color:var(--brick); font-weight:700;}
+
+  /* ============ SECTION HEADS ============ */
+  .sec{padding-block:88px;}
+  .sec-head{max-width:660px; margin-bottom:48px;}
+  .sec-head h2{font-size:clamp(1.9rem,3vw,2.6rem); margin-top:10px;}
+  .sec-head p{margin-top:14px; color:var(--ink-soft); font-size:1.02rem;}
+
+  /* ============ PROGRAMS ============ */
+  .programs-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  @media (max-width:860px){.programs-grid{grid-template-columns:1fr;}}
+  .program-card{
+    background:var(--card); border:1px solid var(--line); border-radius:20px;
+    padding:30px 26px; display:flex; flex-direction:column; gap:14px;
+    box-shadow:var(--shadow);
+  }
+  .program-age{
+    align-self:flex-start; font-weight:800; font-size:0.72rem; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--brick); background:color-mix(in srgb, var(--brick) 12%, transparent);
+    padding:5px 12px; border-radius:999px;
+  }
+  .program-card h3{font-size:1.4rem;}
+  .program-card p{color:var(--ink-soft); font-size:0.96rem;}
+  .program-tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:auto; padding-top:8px;}
+  .program-tags span{
+    font-size:0.76rem; font-weight:700; color:var(--ink-soft);
+    border:1px solid var(--line); padding:4px 10px; border-radius:999px;
+  }
+
+  /* ============ BRANCHES ============ */
+  .branches-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  @media (max-width:860px){.branches-grid{grid-template-columns:1fr;}}
+  .branch-card{
+    background:var(--card); border:1px solid var(--line); border-radius:20px;
+    padding:26px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:12px;
+  }
+  .branch-card.is-open{border-color:var(--yolk-deep);}
+  .branch-tag{
+    align-self:flex-start; font-weight:800; font-size:0.68rem; letter-spacing:0.08em;
+    text-transform:uppercase; color:var(--yolk-deep); background:color-mix(in srgb, var(--yolk) 20%, transparent);
+    padding:5px 12px; border-radius:999px;
+  }
+  .branch-card h3{font-size:1.2rem;}
+  .branch-card address{font-style:normal; font-size:0.9rem; color:var(--ink-soft); line-height:1.5;}
+  .branch-card .branch-phone{
+    display:flex; align-items:center; gap:8px; font-weight:700; font-size:0.88rem;
+    text-decoration:none; color:var(--brick); margin-top:auto; padding-top:6px;
+  }
+  .branch-card .branch-phone svg{width:15px; height:15px; stroke:var(--brick);}
+  .branch-card.is-placeholder{
+    align-items:flex-start; justify-content:center; border-style:dashed;
+    background:transparent; box-shadow:none;
+  }
+  .branch-card.is-placeholder p{font-size:0.9rem; color:var(--ink-soft);}
+
+  /* ============ FAQ ============ */
+  .faq-list{max-width:820px; display:flex; flex-direction:column; gap:12px;}
+  .faq-item{
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:4px 22px; box-shadow:var(--shadow);
+  }
+  .faq-item summary{
+    padding-block:18px; cursor:pointer; list-style:none;
+    display:flex; align-items:center; justify-content:space-between; gap:16px;
+    font-family:var(--font-display); font-weight:600; font-size:1.05rem;
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary .plus{
+    flex:none; width:24px; height:24px; border-radius:50%; border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center; position:relative;
+  }
+  .faq-item summary .plus::before, .faq-item summary .plus::after{
+    content:""; position:absolute; background:var(--brick);
+  }
+  .faq-item summary .plus::before{width:10px; height:2px;}
+  .faq-item summary .plus::after{width:2px; height:10px; transition:transform .18s ease;}
+  .faq-item[open] summary .plus::after{transform:rotate(90deg); opacity:0;}
+  .faq-item p{padding-bottom:20px; margin-top:-4px; color:var(--ink-soft); font-size:0.94rem; max-width:64ch;}
+
+  /* ============ THE FIVE BRICKS (framework) ============ */
+  .wall{display:flex; flex-direction:column; gap:14px; margin-top:8px;}
+  .wall-row{display:flex; gap:14px;}
+  .wall-row.offset{padding-inline:0;}
+  .brick-block{
+    flex:1 1 0;
+    background:var(--card); border:1px solid var(--line); border-radius:14px;
+    padding:22px 20px; box-shadow:var(--shadow);
+    display:flex; flex-direction:column; gap:10px;
+  }
+  .brick-block .icon{
+    width:38px; height:38px; border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    background:color-mix(in srgb, var(--accent, var(--brick)) 16%, transparent);
+  }
+  .brick-block .icon svg{width:20px; height:20px; stroke:var(--accent, var(--brick)); fill:none;}
+  .brick-block h4{font-size:1.08rem;}
+  .brick-block p{font-size:0.9rem; color:var(--ink-soft);}
+  .brick-1{--accent:var(--berry);}
+  .brick-2{--accent:var(--sky);}
+  .brick-3{--accent:var(--yolk-deep);}
+  .brick-4{--accent:var(--brick);}
+  .brick-5{--accent:var(--berry);}
+
+  @media (min-width:701px){
+    .wall-row.offset{padding-inline:calc(50% / 2 - 7px);}
+  }
+  @media (max-width:700px){
+    .wall-row{flex-direction:column;}
+  }
+
+  /* ============ DAY TIMELINE ============ */
+  .timeline{
+    display:grid; grid-template-columns:repeat(6,1fr); gap:0;
+    border-top:1px solid var(--line);
+  }
+  @media (max-width:900px){ .timeline{grid-template-columns:1fr; border-top:none;} }
+  .tl-step{
+    padding:24px 16px 20px; border-right:1px solid var(--line); position:relative;
+  }
+  .tl-step:last-child{border-right:none;}
+  @media (max-width:900px){
+    .tl-step{border-right:none; border-top:1px solid var(--line); padding:18px 4px 18px 24px;}
+  }
+  .tl-time{font-family:var(--font-display); font-weight:600; color:var(--brick); font-size:1rem;}
+  .tl-step h4{margin-top:8px; font-size:1rem;}
+  .tl-step p{margin-top:6px; font-size:0.86rem; color:var(--ink-soft);}
+
+  /* ============ TEACHERS ============ */
+  .teachers-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  @media (max-width:860px){.teachers-grid{grid-template-columns:1fr;}}
+  .teacher-card{text-align:center; padding:12px;}
+  .avatar{
+    width:120px; height:140px; margin-inline:auto; border-radius:50% / 44%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-display); font-weight:600; font-size:2rem; color:#FFF8EC;
+    box-shadow:var(--shadow); position:relative;
+  }
+  .avatar::after{
+    content:""; position:absolute; inset:0; border-radius:inherit;
+    border:2px solid color-mix(in srgb, var(--ink) 8%, transparent);
+  }
+  .avatar-1{background:linear-gradient(155deg, var(--brick), var(--yolk-deep));}
+  .avatar-2{background:linear-gradient(155deg, var(--sky), var(--berry));}
+  .avatar-3{background:linear-gradient(155deg, var(--yolk), var(--brick));}
+  .teacher-card h4{margin-top:18px; font-size:1.12rem;}
+  .teacher-role{display:block; margin-top:3px; font-size:0.8rem; font-weight:700; color:var(--brick); text-transform:uppercase; letter-spacing:0.05em;}
+  .teacher-card p{margin-top:10px; font-size:0.92rem; color:var(--ink-soft);}
+
+  /* ============ TRUST / RECOGNITION ============ */
+  .trust{background:var(--egg-2); padding-block:80px;}
+  .trust-grid{display:grid; grid-template-columns: 1fr 1.2fr; gap:48px; align-items:center;}
+  @media (max-width:900px){.trust-grid{grid-template-columns:1fr;}}
+  .badge-row{display:flex; gap:16px; flex-wrap:wrap;}
+  .badge{
+    background:var(--card); border:1px solid var(--line); border-radius:16px;
+    padding:18px 20px; display:flex; align-items:center; gap:12px; box-shadow:var(--shadow);
+    flex:1 1 210px;
+  }
+  .badge svg{width:26px; height:26px; stroke:var(--yolk-deep); flex:none;}
+  .badge b{display:block; font-family:var(--font-display); font-size:1.1rem;}
+  .badge span{display:block; font-size:0.78rem; color:var(--ink-soft);}
+
+  .testimonial{
+    background:var(--card); border:1px solid var(--line); border-radius:20px;
+    padding:32px 30px; box-shadow:var(--shadow); position:relative;
+  }
+  .testimonial p{font-family:var(--font-display); font-style:italic; font-size:1.15rem; line-height:1.5;}
+  .testimonial footer{margin-top:16px; font-size:0.86rem; font-weight:700; color:var(--brick);}
+  .testimonial footer span{display:block; font-weight:500; color:var(--ink-soft); margin-top:2px;}
+
+  /* ============ ADMISSIONS ============ */
+  .admissions{padding-block:88px;}
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:8px;}
+  @media (max-width:860px){.steps{grid-template-columns:1fr;}}
+  .step{
+    border:1px solid var(--line); border-radius:18px; padding:26px; background:var(--card);
+    box-shadow:var(--shadow);
+  }
+  .step .num{
+    font-family:var(--font-display); font-size:2.1rem; font-weight:600; color:var(--yolk-deep);
+    line-height:1;
+  }
+  .step h4{margin-top:12px; font-size:1.08rem;}
+  .step p{margin-top:8px; font-size:0.92rem; color:var(--ink-soft);}
+
+  .admit-cta{
+    margin-top:40px; border-radius:24px; padding:40px;
+    background:linear-gradient(135deg, var(--brick), var(--brick-deep));
+    color:#FFF7EE; display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
+  }
+  .admit-cta h3{color:#FFF7EE; font-size:1.5rem; max-width:30ch;}
+  .admit-cta p{color:color-mix(in srgb, #FFF7EE 82%, transparent); margin-top:8px; font-size:0.94rem;}
+  .admit-cta .btn-primary{background:#FFF7EE; color:var(--brick-deep);}
+  .admit-cta .btn-primary:hover{background:#fff;}
+
+  /* ============ FOOTER ============ */
+  footer.site{background:var(--ink); color:color-mix(in srgb, var(--egg) 92%, transparent); padding-block:56px 28px;}
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) footer.site{background:#1C140E;} }
+  :root[data-theme="dark"] footer.site{background:#1C140E;}
+  .foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px;}
+  @media (max-width:760px){.foot-grid{grid-template-columns:1fr; gap:32px;}}
+  .foot-brand{display:flex; align-items:center; gap:10px;}
+  .foot-brand .brand-word{color:#FFF7EE;}
+  .foot-brand .brand-word small{color:color-mix(in srgb, #FFF7EE 60%, transparent);}
+  footer.site p.tag{margin-top:14px; color:color-mix(in srgb, #FFF7EE 68%, transparent); font-size:0.92rem; max-width:34ch;}
+  footer.site h5{font-size:0.76rem; letter-spacing:0.1em; text-transform:uppercase; color:color-mix(in srgb, #FFF7EE 55%, transparent); font-weight:800; margin-bottom:14px;}
+  footer.site ul{display:flex; flex-direction:column; gap:10px;}
+  footer.site a{text-decoration:none; color:color-mix(in srgb, #FFF7EE 85%, transparent); font-size:0.92rem;}
+  footer.site a:hover{color:var(--yolk);}
+  .foot-social{display:flex; gap:12px; margin-top:16px;}
+  .foot-social a{
+    width:36px; height:36px; border-radius:50%; border:1px solid color-mix(in srgb, #FFF7EE 25%, transparent);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .foot-social svg{width:16px; height:16px; stroke:#FFF7EE;}
+  .foot-bottom{
+    margin-top:44px; padding-top:22px; border-top:1px solid color-mix(in srgb, #FFF7EE 16%, transparent);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    font-size:0.8rem; color:color-mix(in srgb, #FFF7EE 55%, transparent);
+  }
+
+  /* reveal on scroll */
+  .reveal{opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:none;}
+</style>
+
+<header>
+  <div class="wrap headbar">
+    <a href="#top" class="brand">
+      <img class="brand-logo" src="assets/logo.png" alt="Humpty Dumpty Kidz School">
+      <span class="brand-word" style="font-size:0.72rem; font-family:var(--font-body); font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--ink-soft);">Durgapur</span>
+    </a>
+    <nav class="primary" id="primaryNav">
+      <a href="#programs">Programs</a>
+      <a href="#branches">Branches</a>
+      <a href="#approach">Our Approach</a>
+      <a href="#teachers">Teachers</a>
+      <a href="#faq">FAQ</a>
+      <a href="#admissions">Admissions</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="head-actions">
+      <a class="tel-link" href="tel:+919609905596">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg>
+        +91-96099 05596
+      </a>
+      <a class="btn btn-primary" href="#admissions">Book a Visit</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="primaryNav">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Preschool &amp; Daycare · Ages 1–5</p>
+        <h1>Play. Explore. <em>Learn.</em></h1>
+        <p class="hero-lede">A trusted preschool and activity centre in Durgapur, where little minds discover, learn and flourish in a safe, caring, joyful environment — one gentle step at a time.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#admissions">Book a Visit</a>
+          <a class="btn btn-ghost" href="#approach">See Our Approach</a>
+        </div>
+        <div class="hero-badges">
+          <div class="hero-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9 12 2"/></svg>
+            <div><b>5.0 / 5.0</b><span>Google rating</span></div>
+          </div>
+          <div class="hero-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21C12 21 4 15.5 4 9.5A5.5 5.5 0 0 1 12 5a5.5 5.5 0 0 1 8 4.5C20 15.5 12 21 12 21Z"/></svg>
+            <div><b>Since founding</b><span>Led by Dr. Prasan Dibhar</span></div>
+          </div>
+          <div class="hero-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6-9 6-9-6Z"/><path d="M3 10v6l9 6 9-6v-6"/></svg>
+            <div><b>Rashtriya Samman</b><span>Recognised 2025</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="ring"></div>
+        <div class="yolk-circle"></div>
+        <svg class="crack" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <path d="M38 8 L46 32 L34 40 L56 58 L44 68 L64 92" />
+        </svg>
+        <div class="chip chip-1">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Play-based learning
+        </div>
+        <div class="chip chip-2">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 1 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78Z"/></svg>
+          Kind, caring teachers
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="course" role="presentation">
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <!-- MESSAGE FROM THE PRESIDENT -->
+  <section class="president reveal">
+    <div class="wrap">
+      <div class="president-photo-frame">
+        <img src="assets/president.jpg" alt="Dr. Prasan Dibhar, Founder and Chairman of Humpty Dumpty Kidz School, with a young student">
+      </div>
+      <div class="president-text">
+        <p class="eyebrow" style="margin-bottom:14px;">A Message From Our President</p>
+        <blockquote>"We spark the joy of learning in every child — nurturing their natural curiosity, and guiding them as they grow into confident, compassionate, capable individuals. Every child who walks through our doors is known, welcomed, and given the room to become who they're meant to be."</blockquote>
+        <div class="role">
+          <div>
+            <b>Dr. Prasan Dibhar</b>
+            <span>Founder &amp; Chairman, Humpty Dumpty Kidz School</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAMS -->
+  <section class="sec" id="programs">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">Programs</p>
+        <h2>A step for every age, from first steps to first sentences.</h2>
+        <p>Children join our 2–4's program based on their birth year, moving through three unhurried stages designed around how young children actually grow.</p>
+      </div>
+      <div class="programs-grid">
+        <div class="program-card reveal">
+          <span class="program-age">Age 6–18 months</span>
+          <h3>Infant Care</h3>
+          <p>Warm, one-on-one attention in a calm space built for napping, feeding and the first big milestones — sitting, crawling, first words.</p>
+          <div class="program-tags"><span>Half Day</span><span>Full Day</span></div>
+        </div>
+        <div class="program-card reveal">
+          <span class="program-age">Age 18 months – 3 years</span>
+          <h3>Toddlers</h3>
+          <p>Guided play, movement and language-rich routines that help toddlers build independence, curiosity and their first friendships.</p>
+          <div class="program-tags"><span>Half Day</span><span>Full Day</span><span>Extended Day</span></div>
+        </div>
+        <div class="program-card reveal">
+          <span class="program-age">Age 3 – 5 years</span>
+          <h3>Preschool</h3>
+          <p>Foundational literacy, numeracy and social skills delivered through learning labs, play stations and hands-on discovery.</p>
+          <div class="program-tags"><span>Full Day</span><span>Extended Day</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="course offset" role="presentation">
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <!-- BRANCHES -->
+  <section class="sec" id="branches">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">Our Branches</p>
+        <h2>Find your nearest Humpty Dumpty campus.</h2>
+        <p>Currently welcoming families at our Benachity campus in Durgapur, with more neighbourhoods on the way.</p>
+      </div>
+      <div class="branches-grid">
+        <div class="branch-card is-open reveal">
+          <span class="branch-tag">Flagship Campus</span>
+          <h3>Benachity, Durgapur</h3>
+          <address>34, 3B Street, near 54 Foot Road,<br>Srinagar Pally, Benachity,<br>Durgapur, West Bengal 713213</address>
+          <a class="branch-phone" href="tel:+919609905596">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92z"/></svg>
+            +91-96099 05596
+          </a>
+        </div>
+        <div class="branch-card is-placeholder reveal">
+          <span class="branch-tag" style="color:var(--ink-soft); background:transparent; border:1px solid var(--line);">Coming Soon</span>
+          <h3>Opening Next</h3>
+          <p>We're scouting our next Durgapur neighbourhood. Ask us at your visit if you'd like early access when it opens.</p>
+        </div>
+        <div class="branch-card is-placeholder reveal">
+          <span class="branch-tag" style="color:var(--ink-soft); background:transparent; border:1px solid var(--line);">Coming Soon</span>
+          <h3>Opening Next</h3>
+          <p>Interested in a Humpty Dumpty campus in your area? Let us know when you enquire.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="course" role="presentation">
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <!-- APPROACH / FIVE BRICKS -->
+  <section class="sec" id="approach" style="background:var(--egg-2);">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">Our Approach</p>
+        <h2>Every child is a wall we help build, one brick at a time.</h2>
+        <p>Our namesake reminds us that a wall is only as strong as what holds it together. Five developmental bricks make up our whole-child framework — laid, like real brickwork, so each one supports the next.</p>
+      </div>
+
+      <div class="wall">
+        <div class="wall-row">
+          <div class="brick-block reveal brick-1">
+            <div class="icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21C12 21 4 15.5 4 9.5A5.5 5.5 0 0 1 12 5a5.5 5.5 0 0 1 8 4.5C20 15.5 12 21 12 21Z"/></svg></div>
+            <h4>Heart</h4>
+            <p>Kindness and emotional wellbeing, built through morning huddles and gentle, consistent care.</p>
+          </div>
+          <div class="brick-block reveal brick-2">
+            <div class="icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4a4 4 0 0 0-4 4c0 2 1.5 2.7 1.5 4.5V15h5v-2.5C14.5 10.7 16 10 16 8a4 4 0 0 0-4-4Z"/><path d="M9.5 18h5M10 21h4"/></svg></div>
+            <h4>Mind</h4>
+            <p>Curiosity and early literacy and numeracy, explored through daily learning labs.</p>
+          </div>
+          <div class="brick-block reveal brick-3">
+            <div class="icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></div>
+            <h4>Hands</h4>
+            <p>Creativity and innovation, practised freely at open-ended play stations.</p>
+          </div>
+        </div>
+        <div class="wall-row offset">
+          <div class="brick-block reveal brick-4">
+            <div class="icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.2"/><path d="M12 8v6M12 14l-4 7M12 14l4 7M8 11l-3 2M16 11l3 2"/></svg></div>
+            <h4>Body</h4>
+            <p>Nutrition, rest and outdoor play, balanced across every full day.</p>
+          </div>
+          <div class="brick-block reveal brick-5">
+            <div class="icon"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="9" r="3"/><circle cx="17" cy="10" r="2.4"/><path d="M2 20c0-3.3 2.7-6 6-6s6 2.7 6 6M14.5 14.3c2.6.4 4.5 2.7 4.5 5.4"/></svg></div>
+            <h4>Friends</h4>
+            <p>Social skills built in a small, close-knit classroom where every child is known by name.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DAY TIMELINE -->
+  <section class="sec" id="day">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">A Day at HDKS</p>
+        <h2>What a full day actually looks like.</h2>
+        <p>Structured enough to feel safe, loose enough to feel like play.</p>
+      </div>
+      <div class="timeline">
+        <div class="tl-step reveal"><span class="tl-time">8:30</span><h4>Morning Huddle</h4><p>Greetings, songs and a gentle start to the day.</p></div>
+        <div class="tl-step reveal"><span class="tl-time">9:15</span><h4>Skill Building</h4><p>Focused, age-appropriate lessons in small groups.</p></div>
+        <div class="tl-step reveal"><span class="tl-time">10:15</span><h4>Play Stations</h4><p>Open-ended, child-led exploration and creativity.</p></div>
+        <div class="tl-step reveal"><span class="tl-time">12:00</span><h4>Nutritious Meals</h4><p>Wholesome food and unhurried mealtime routines.</p></div>
+        <div class="tl-step reveal"><span class="tl-time">1:30</span><h4>Learning Labs</h4><p>Hands-on discovery in literacy, numbers and the world.</p></div>
+        <div class="tl-step reveal"><span class="tl-time">3:00</span><h4>Outdoor Play</h4><p>Fresh air, movement and free play before pickup.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="course" role="presentation">
+    <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
+
+  <!-- TEACHERS -->
+  <section class="sec" id="teachers">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">Meet the Teachers</p>
+        <h2>The faces your child sees every morning.</h2>
+        <p>Small classrooms, led by teachers who stay with the same age group all year.</p>
+      </div>
+      <div class="teachers-grid">
+        <div class="teacher-card reveal">
+          <div class="avatar avatar-1">ES</div>
+          <h4>Ella Stark</h4>
+          <span class="teacher-role">Lead Teacher · 1–2 years</span>
+          <p>Focused on first steps, first words and the security of a familiar routine.</p>
+        </div>
+        <div class="teacher-card reveal">
+          <div class="avatar avatar-2">HB</div>
+          <h4>Harriet Bailey</h4>
+          <span class="teacher-role">Lead Teacher · 2–3 years</span>
+          <p>Champions independence — self-feeding, sharing, and early social play.</p>
+        </div>
+        <div class="teacher-card reveal">
+          <div class="avatar avatar-3">MS</div>
+          <h4>Melinda Schiller</h4>
+          <span class="teacher-role">Lead Teacher · 3–4 years</span>
+          <p>Guides learning labs and school-readiness skills with patience and warmth.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST / RECOGNITION -->
+  <section class="trust">
+    <div class="wrap trust-grid">
+      <div class="reveal">
+        <p class="eyebrow">Recognition &amp; Trust</p>
+        <h2 style="font-size:clamp(1.7rem,2.6vw,2.2rem); margin-top:10px;">Families in Durgapur trust us with their little ones.</h2>
+        <div class="badge-row" style="margin-top:26px;">
+          <div class="badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15 9 22 9.5 17 14.5 18.5 22 12 18 5.5 22 7 14.5 2 9.5 9 9 12 2"/></svg>
+            <div><b>5.0 Google rating</b><span>From parents in our community</span></div>
+          </div>
+          <div class="badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10l9-6 9 6-9 6-9-6Z"/><path d="M3 10v6l9 6 9-6v-6"/></svg>
+            <div><b>Rashtriya Samman 2025</b><span>National recognition programme</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial reveal">
+        <p>"Every morning my daughter runs in without looking back — that's how we knew we'd found the right place. The teachers know her by name and notice the little things."</p>
+        <footer>Ramona Altenwerth<span>Parent, Humpty Dumpty Kidz School</span></footer>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="sec" id="faq" style="background:var(--egg-2);">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">Frequently Asked</p>
+        <h2>Questions parents ask us most.</h2>
+        <p>Can't find your answer here? Call us and we'll walk you through it.</p>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item reveal" open>
+          <summary>What age can my child join, and how does admission work?<span class="plus"></span></summary>
+          <p>We welcome children from 6 months (Infant Care) through age 5. Little ones enter our 2–4's program based on their birth year. Enquire by phone, book a visit to meet the lead teacher for your child's age group, then complete the enrollment form to confirm your seat.</p>
+        </details>
+        <details class="faq-item reveal">
+          <summary>What is the teacher-to-child ratio in each classroom?<span class="plus"></span></summary>
+          <p>We keep classrooms small by design — roughly 1 teacher for every 4 children in Infant Care, 1 for every 6 in Toddlers, and 1 for every 10 in Preschool, so every child gets noticed, not just supervised.</p>
+        </details>
+        <details class="faq-item reveal">
+          <summary>What's the difference between Half Day, Full Day and Extended Day?<span class="plus"></span></summary>
+          <p>Half Day covers morning huddle through lunch. Full Day adds learning labs, rest and outdoor play through mid-afternoon. Extended Day extends care into the early evening for working families — ask us for current timings.</p>
+        </details>
+        <details class="faq-item reveal">
+          <summary>Are meals and snacks provided?<span class="plus"></span></summary>
+          <p>Yes — nutritious, age-appropriate meals and snacks are part of every Full Day and Extended Day schedule, prepared with mealtime routines that build healthy habits early.</p>
+        </details>
+        <details class="faq-item reveal">
+          <summary>How do I book a visit before enrolling?<span class="plus"></span></summary>
+          <p>Call us at +91-96099 05596 or use the Book a Visit button on this page. We'll set up a twenty-minute tour of the classroom for your child's age group.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADMISSIONS -->
+  <section class="admissions" id="admissions">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <p class="eyebrow">Admissions</p>
+        <h2>Three simple steps to enrol.</h2>
+        <p>Seats in our 2–4's program are assigned by birth year and fill on a rolling basis — enquire early for your preferred start date.</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal">
+          <span class="num">01</span>
+          <h4>Enquire</h4>
+          <p>Call or message us with your child's age and the schedule you're considering.</p>
+        </div>
+        <div class="step reveal">
+          <span class="num">02</span>
+          <h4>Visit</h4>
+          <p>Tour the classrooms, meet the lead teacher for your child's age group, and ask questions.</p>
+        </div>
+        <div class="step reveal">
+          <span class="num">03</span>
+          <h4>Enrol</h4>
+          <p>Complete the enrollment form and choose Half Day, Full Day or Extended Day.</p>
+        </div>
+      </div>
+
+      <div class="admit-cta reveal">
+        <div>
+          <h3>Ready to see it for yourself?</h3>
+          <p>Book a visit and spend twenty minutes in a classroom before you decide anything.</p>
+        </div>
+        <a class="btn btn-primary" href="tel:+919609905596">Call +91-96099 05596</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER / CONTACT -->
+<footer class="site" id="contact">
+  <div class="wrap foot-grid">
+    <div>
+      <div class="foot-brand">
+        <img class="brand-logo" src="assets/logo.png" alt="Humpty Dumpty Kidz School" style="background:#fff; border-radius:10px; padding:6px;">
+      </div>
+      <p class="tag">A trusted preschool and activity centre where little minds discover, learn and flourish.</p>
+      <div class="foot-social">
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg></a>
+        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3V9z" fill="var(--egg)" stroke="none"/></svg></a>
+      </div>
+    </div>
+    <div>
+      <h5>Visit Us</h5>
+      <ul>
+        <li>34, 3B Street, near 54 Foot Road</li>
+        <li>Srinagar Pally, Benachity</li>
+        <li>Durgapur, West Bengal 713213</li>
+      </ul>
+    </div>
+    <div>
+      <h5>Get in Touch</h5>
+      <ul>
+        <li><a href="tel:+919609905596">+91-96099 05596</a></li>
+        <li><a href="#admissions">Book a Visit</a></li>
+        <li><a href="#programs">View Programs</a></li>
+        <li>@humptidumptikidz</li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <span>© 2026 Humpty Dumpty Kidz School, Durgapur.</span>
+    <span>Design concept — alternate site draft.</span>
+  </div>
+</footer>
+
+<script>
+  var toggle = document.getElementById('menuToggle');
+  var nav = document.getElementById('primaryNav');
+  toggle.addEventListener('click', function(){
+    var open = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  nav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){ nav.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); });
+  });
+
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:0.14});
+    document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('in'); });
+  }
+</script>
