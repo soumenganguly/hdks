@@ -397,6 +397,7 @@
   /* ============ TRUST / RECOGNITION ============ */
   .trust{background:var(--egg-2); padding-block:80px;}
   .trust-grid{display:grid; grid-template-columns: 1fr 1.2fr; gap:48px; align-items:center;}
+  .trust-grid > *{min-width:0;}
   @media (max-width:900px){.trust-grid{grid-template-columns:1fr;}}
   .badge-row{display:flex; gap:16px; flex-wrap:wrap;}
   .badge{
@@ -409,9 +410,9 @@
   .badge b{display:block; font-family:var(--font-display); font-size:1.1rem;}
   .badge span{display:block; font-size:0.78rem; color:var(--ink-soft);}
 
-  .testimonial-slider{position:relative;}
-  .testimonial-viewport{overflow:hidden; border-radius:20px;}
-  .testimonial-track{display:flex; transition:transform .5s ease;}
+  .testimonial-slider{position:relative; min-width:0;}
+  .testimonial-viewport{overflow:hidden; border-radius:20px; min-width:0;}
+  .testimonial-track{display:flex; transition:transform .5s ease; min-width:0;}
   @media (prefers-reduced-motion: reduce){ .testimonial-track{transition:none;} }
 
   .testimonial{
